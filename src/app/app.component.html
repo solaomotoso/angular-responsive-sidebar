@@ -1,31 +1,56 @@
 <mat-toolbar class="mat-elevation-z8">
   <button
     mat-icon-button
-    *ngIf="sidenav.mode === 'over'"
-    (click)="sidenav.toggle()"
+    *ngIf="sidenav?.mode === 'over'"
+    (click)="sidenav?.toggle()"
   >
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Responsive side navigation
+  Dining Application
+  <button mat-button *ngIf="isLoggedIn$">{{loggedinUser}}</button>
+  <div id="login">
+  <button mat-button routerLink="login" *ngIf="!isLoggedIn$" style="text-align: right;">Login</button>
+  <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">Logout</button>
+ </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img
-      class="avatar mat-elevation-z8"
-      src="https://source.unsplash.com/c_GmwfHBDzk/200x200"
-    />
-
-    <h4 class="name">John Smith</h4>
-    <p class="designation">Software Engineer</p>
-
-    <mat-divider></mat-divider>
-
-    <button mat-button class="menu-button" routerLink="/home">
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
+  <mat-sidenav #sidenav="matSidenav" *ngIf="isLoggedIn$ | async" mode='side' class="mat-elevation-z8">
+    <button mat-button class="menu-button">
+      <!--<mat-icon>Menu</mat-icon>-->
+      <span>Menu</span>
     </button>
+    <mat-divider></mat-divider>
+    <!-- <button mat-button  class="menu-button" routerLink="/home"> -->
+      <!--<mat-icon>Administration</mat-icon>-->
+      <!-- <span>Home</span> -->
+    <!-- </button> -->
+    <button mat-button class="menu-button" routerLink="/registrations">
+      <!--<mat-icon>Administration</mat-icon>-->
+      <span>Registration</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/payment">
+      <!--<mat-icon>Administration</mat-icon>-->
+      <span>Payment</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/voucher">
+      <!--<mat-icon>Administration</mat-icon>-->
+      <span>Voucher</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/voucherdetails">
+      <!--<mat-icon>Administration</mat-icon>-->
+      <span>Voucher Details</span>
+    </button>
+    <!-- <button mat-button class="menu-button" routerLink="/voucheredit"> -->
+      <!--<mat-icon>Administration</mat-icon>-->
+      <!-- <span>New Voucher</span> -->
+    <!-- </button> -->
+    <!-- <button mat-button class="menu-button" routerLink="/registration">
+      <mat-icon>Administration</mat-icon>-->
+      <!-- <span>Registration</span>
+    </button> -->
+
     <button mat-button class="menu-button" routerLink="/profile">
       <mat-icon>person</mat-icon>
       <span>Profile</span>
@@ -37,10 +62,10 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/help">
+    <!--<button mat-button class="menu-button" routerLink="/help">
       <mat-icon>help</mat-icon>
       <span>Help</span>
-    </button>
+    </button>-->
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
